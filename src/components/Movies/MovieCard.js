@@ -16,9 +16,7 @@ export default class MovieCard extends Component {
     for (let i = stars_earned[stars_earned.length - 1] + 1; i <= 5; i++) {
       stars_not_earned.push(i);
     }
-    console.log(stars_earned);
-    console.log(stars_not_earned);
-    console.log(movie);
+
     return (
       <div className="flip-card">
         <div className="flip-card-inner">

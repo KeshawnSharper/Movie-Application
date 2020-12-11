@@ -28,7 +28,6 @@ img {
 WRAPPER
 *****************/
 #wrapper {
-  min-width: 1000px;
   // margin:0 auto;
   background-color: $light-background;
   font-family: 'Poppins', sans-serif;
@@ -119,7 +118,7 @@ header {
     margin-bottom: auto;
     text-transform: uppercase;
     color: $white;
-    width: 400px;
+    // width: 400px;
     margin-left: 10em;
     h1 {
       font-size: 3.8em;
@@ -179,19 +178,25 @@ header {
     MAIN (MOVIES)
 ***********************/
 main {
-  width: 800px;
+  // width: 800px;
   background: $light-background;
   margin: auto;
   transform: translateY(-5%);
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   padding: 1.5em 2em;
+  overflow-x: auto;
+  @media only screen and (min-width: 600px) {
+    width:1050px;
+  }
+  // white-space: nowrap;
   .options {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     text-align: center;
     text-transform: uppercase;
+    width:100%;
     // margin-bottom:2em;
     .active {
       color: $yellow;

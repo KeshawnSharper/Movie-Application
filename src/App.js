@@ -5,7 +5,7 @@ import Google from "./components/GoogleAuth/Google";
 import Home from "./components/Home/Home";
 import { getNowPlaying, getPopular } from "./actions/actions";
 import { connect } from "react-redux";
-
+import Loader from "./components/Loader/Loader";
 function App(props) {
   useEffect(() => {
     props.getNowPlaying();
@@ -13,9 +13,17 @@ function App(props) {
   }, []);
   return (
     <div className="App">
-      <Home />
-      <Google />
-      <Facebook />
+      {!props.nowPlaying ? (
+        <>
+          <Loader />
+        </>
+      ) : (
+        <>
+          <Home />
+          <Google />
+          <Facebook />
+        </>
+      )}
     </div>
   );
 }

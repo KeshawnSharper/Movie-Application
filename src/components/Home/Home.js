@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import FacebookLogin from "react-facebook-login";
 import "./Home.scss";
+import MovieList from "../Movies/MovieList";
+
 export default class Home extends Component {
   state = {
     isLoggedIn: false,
@@ -94,6 +96,7 @@ export default class Home extends Component {
             </form>
           </div>
           {/*forms*/}
+          <MovieList />
           <section id="movies"></section>
         </main>
         {/*container end*/}

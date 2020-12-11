@@ -4,6 +4,7 @@
   height: 300px;
   perspective: 1000px;
   border-radius: 25%;
+  margin-right: 1rem;
 }
 
 .flip-card-inner {
