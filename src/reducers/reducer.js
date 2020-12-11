@@ -27,6 +27,11 @@ export const StoreReducer = (state = initState, action) => {
         ...state,
         upcoming: [...state.upcoming, action.upcoming]
       };
+    case "GET_SEARCH":
+      return {
+        ...state,
+        search: [action.search]
+      };
     default:
       return initState;
   }

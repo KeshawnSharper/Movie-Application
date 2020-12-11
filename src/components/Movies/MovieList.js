@@ -8,7 +8,8 @@ import {
   getNowPlaying,
   getTopRated,
   getPopular,
-  getUpcoming
+  getUpcoming,
+  getSearch
 } from "../../actions/actions";
 
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +24,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MovieList = (props) => {
-  const { nowPlaying, latest, popular, movieList, upcoming, topRated } = props;
+  const {
+    nowPlaying,
+    search,
+    latest,
+    popular,
+    movieList,
+    upcoming,
+    topRated
+  } = props;
   const classes = useStyles();
   console.log(movieList);
   return (
@@ -113,7 +122,8 @@ function mapStateToProps(state) {
     nowPlaying: state.nowPlaying,
     popular: state.popular,
     upcoming: state.upcoming,
-    topRated: state.topRated
+    topRated: state.topRated,
+    search: state.search
   };
 }
 const mapDispatchToProps = (dispatch) => {
@@ -129,6 +139,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     getTopRated: (id) => {
       dispatch(getTopRated(id));
+    },
+    getSearch: (id) => {
+      dispatch(getSearch(id));
     }
   };
 };

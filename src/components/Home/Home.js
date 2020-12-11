@@ -2,21 +2,36 @@ import React, { Component } from "react";
 import FacebookLogin from "react-facebook-login";
 import "./Home.scss";
 import MovieList from "../Movies/MovieList";
+import {
+  getNowPlaying,
+  getTopRated,
+  getPopular,
+  getUpcoming,
+  getSearch
+} from "../../actions/actions";
+import { connect } from "react-redux";
+class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.searchMovie = this.searchMovie.bind(this);
+    this.state = {
+      isLoggedIn: false,
+      userID: "",
+      name: "",
+      email: "",
+      picture: "",
+      movieList: "nowPlaying"
+    };
+  }
 
-export default class Home extends Component {
-  state = {
-    isLoggedIn: false,
-    userID: "",
-    name: "",
-    email: "",
-    picture: "",
-    movieList: "nowPlaying"
-  };
   componentClicked = () => {
     console.log("clicked");
   };
   responseFacebook = (response) => {
     console.log(response);
+  };
+  searchMovie = (event) => {
+    this.props.getSearch(event.target.value);
   };
   render() {
     return (
@@ -110,29 +125,19 @@ export default class Home extends Component {
               <i className="fa fa-navicon" />
               <i className="fa fa-th" />
             </div>
-            <form id="range-form">
-              <p>IMDb Rating</p>
-              <div className="group">
+            {this.state.movieList === "search" ? (
+              <form id="search-form">
                 <input
-                  id="range"
-                  type="range"
-                  min={6.0}
-                  max="8.3"
-                  step="0.1"
-                  defaultValue={6}
+                  id="search"
+                  type="search"
+                  onChange={this.searchMovie}
+                  placeholder="Search Movies..."
                 />
-                <p id="results">6</p>
-              </div>
-            </form>
-            <form id="search-form">
-              <input
-                id="search"
-                type="search"
-                results={5}
-                placeholder="Search Movies..."
-              />
-              <i className="fa fa-search" />
-            </form>
+                <i className="fa fa-search" />
+              </form>
+            ) : (
+              <></>
+            )}
           </div>
           {/*forms*/}
           <MovieList movieList={this.state.movieList} />
@@ -159,3 +164,34 @@ export default class Home extends Component {
     );
   }
 }
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+    nowPlaying: state.nowPlaying,
+    popular: state.popular,
+    upcoming: state.upcoming,
+    topRated: state.topRated,
+    search: state.search
+  };
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getNowPlaying: (id) => {
+      dispatch(getNowPlaying());
+    },
+    getPopular: (id) => {
+      dispatch(getPopular());
+    },
+    getUpcoming: (id) => {
+      dispatch(getUpcoming());
+    },
+    getTopRated: (id) => {
+      dispatch(getTopRated(id));
+    },
+    getSearch: (movie) => {
+      dispatch(getSearch(movie));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

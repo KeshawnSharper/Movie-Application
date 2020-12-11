@@ -37,11 +37,11 @@ export function getUpcoming(id = 1) {
       });
   };
 }
-export function getSearch() {
+export function getSearch(movie) {
   return (dispatch) => {
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/upcoming?api_key=bab5bd152949b76eccda9216965fc0f1&language=en-US&page=1`
+        `https://api.themoviedb.org/3/search/movie?api_key=bab5bd152949b76eccda9216965fc0f1&language=en-US&query=${movie}&page=1`
       )
       .then((res) => {
         console.log(res.data);
