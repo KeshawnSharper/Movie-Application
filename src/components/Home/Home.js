@@ -9,7 +9,8 @@ export default class Home extends Component {
     userID: "",
     name: "",
     email: "",
-    picture: ""
+    picture: "",
+    movieList: "nowPlaying"
   };
   componentClicked = () => {
     console.log("clicked");
@@ -59,12 +60,50 @@ export default class Home extends Component {
         </header>
         <main>
           <ul className="options">
-            <li className="active">in theaters</li>
-            <li>coming soon</li>
-            <li>charts</li>
-            <li>tv series</li>
-            <li>trailers</li>
-            <li>more</li>
+            <li
+              onClick={() => {
+                this.setState({
+                  movieList: "nowPlaying"
+                });
+              }}
+              className={this.state.movieList === "nowPlaying" ? "active" : ""}
+            >
+              in theaters
+            </li>
+            <li
+              onClick={() => {
+                this.setState({
+                  movieList: "upcoming"
+                });
+              }}
+              className={this.state.movieList === "upcoming" ? "active" : ""}
+            >
+              coming soon
+            </li>
+            <li
+              onClick={() => {
+                this.setState({ movieList: "popular" });
+              }}
+              className={this.state.movieList === "popular" ? "active" : ""}
+            >
+              popular
+            </li>
+            <li
+              onClick={() => {
+                this.setState({ movieList: "topRated" });
+              }}
+              className={this.state.movieList === "topRated" ? "active" : ""}
+            >
+              Top rated
+            </li>
+            <li
+              onClick={() => {
+                this.setState({ movieList: "search" });
+              }}
+              className={this.state.movieList === "search" ? "active" : ""}
+            >
+              Search
+            </li>
           </ul>
           <div id="forms">
             <div className="buttons">
@@ -96,7 +135,7 @@ export default class Home extends Component {
             </form>
           </div>
           {/*forms*/}
-          <MovieList />
+          <MovieList movieList={this.state.movieList} />
           <section id="movies"></section>
         </main>
         {/*container end*/}

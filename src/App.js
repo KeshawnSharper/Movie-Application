@@ -3,13 +3,20 @@ import "./styles.css";
 import Facebook from "./components/Facebook";
 import Google from "./components/GoogleAuth/Google";
 import Home from "./components/Home/Home";
-import { getNowPlaying, getPopular } from "./actions/actions";
+import {
+  getNowPlaying,
+  getTopRated,
+  getPopular,
+  getUpcoming
+} from "./actions/actions";
 import { connect } from "react-redux";
 import Loader from "./components/Loader/Loader";
 function App(props) {
   useEffect(() => {
     props.getNowPlaying();
     props.getPopular();
+    props.getUpcoming();
+    props.getTopRated();
   }, []);
   return (
     <div className="App">
@@ -30,7 +37,9 @@ function App(props) {
 function mapStateToProps(state) {
   return {
     user: state.user,
-    nowPlaying: state.nowPlaying
+    nowPlaying: state.nowPlaying,
+    upcoming: state.upcoming,
+    topRated: state.topRated
   };
 }
 const mapDispatchToProps = (dispatch) => {
@@ -40,6 +49,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     getPopular: () => {
       dispatch(getPopular());
+    },
+    getUpcoming: () => {
+      dispatch(getUpcoming());
+    },
+    getTopRated: () => {
+      dispatch(getTopRated());
     }
   };
 };

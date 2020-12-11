@@ -1,10 +1,10 @@
 import axios from "axios";
 
-export function getNowPlaying() {
+export function getNowPlaying(id = 1) {
   return (dispatch) => {
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/now_playing?api_key=bab5bd152949b76eccda9216965fc0f1&language=en-US&page=1`
+        `https://api.themoviedb.org/3/movie/now_playing?api_key=bab5bd152949b76eccda9216965fc0f1&language=en-US&page=${id}`
       )
       .then((res) => {
         console.log(res.data);
@@ -13,15 +13,51 @@ export function getNowPlaying() {
   };
 }
 
-export function getPopular() {
+export function getPopular(id = 1) {
   return (dispatch) => {
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/popular?api_key=bab5bd152949b76eccda9216965fc0f1&language=en-US&page=1`
+        `https://api.themoviedb.org/3/movie/popular?api_key=bab5bd152949b76eccda9216965fc0f1&language=en-US&page=${id}`
       )
       .then((res) => {
         console.log(res.data);
         dispatch({ type: "GET_POPULAR", popular: res.data });
+      });
+  };
+}
+export function getUpcoming(id = 1) {
+  return (dispatch) => {
+    axios
+      .get(
+        `https://api.themoviedb.org/3/movie/upcoming?api_key=bab5bd152949b76eccda9216965fc0f1&language=en-US&page=${id}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        dispatch({ type: "GET_UPCOMING", upcoming: res.data });
+      });
+  };
+}
+export function getSearch() {
+  return (dispatch) => {
+    axios
+      .get(
+        `https://api.themoviedb.org/3/movie/upcoming?api_key=bab5bd152949b76eccda9216965fc0f1&language=en-US&page=1`
+      )
+      .then((res) => {
+        console.log(res.data);
+        dispatch({ type: "GET_SEARCH", search: res.data });
+      });
+  };
+}
+export function getTopRated() {
+  return (dispatch) => {
+    axios
+      .get(
+        `https://api.themoviedb.org/3/movie/top_rated?api_key=bab5bd152949b76eccda9216965fc0f1&language=en-US&page=1`
+      )
+      .then((res) => {
+        console.log(res.data);
+        dispatch({ type: "GET_TOP_RATED", topRated: res.data });
       });
   };
 }

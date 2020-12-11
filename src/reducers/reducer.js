@@ -12,6 +12,21 @@ export const StoreReducer = (state = initState, action) => {
         ...state,
         popular: [...state.popular, action.popular]
       };
+    case "GET_LATEST":
+      return {
+        ...state,
+        latest: [...state.latest, action.latest]
+      };
+    case "GET_TOP_RATED":
+      return {
+        ...state,
+        topRated: [...state.topRated, action.topRated]
+      };
+    case "GET_UPCOMING":
+      return {
+        ...state,
+        upcoming: [...state.upcoming, action.upcoming]
+      };
     default:
       return initState;
   }

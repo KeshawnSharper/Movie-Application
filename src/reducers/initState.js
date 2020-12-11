@@ -1,6 +1,10 @@
 const initState = {
   user: {},
   nowPlaying: [],
-  popular: []
+  popular: [],
+  comingSoon: [],
+  upcoming: [],
+  topRated: [],
+  search: []
 };
 export default initState;
