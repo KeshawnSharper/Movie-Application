@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./MovieCard.css";
+import MovieProfile from "./MovieProfile";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 export default class MovieCard extends Component {
@@ -28,17 +29,11 @@ export default class MovieCard extends Component {
             />
           </div>
           <div className="flip-card-back" style={{ backgroundColor: "black" }}>
-            <h1>{movie.title}</h1>
-            <p>{movie.vote_average}</p>
-            <div>
-              {stars_earned.map((star) => (
-                <FontAwesomeIcon icon={faStar} color="Gold" />
-              ))}
-              {stars_not_earned.map((star) => (
-                <FontAwesomeIcon icon={faStar} color="white" />
-              ))}
-              <p>{movie.overview}</p>
-            </div>
+            <MovieProfile
+              movie={movie}
+              stars_earned={stars_earned}
+              stars_not_earned={stars_not_earned}
+            />
           </div>
         </div>
       </div>

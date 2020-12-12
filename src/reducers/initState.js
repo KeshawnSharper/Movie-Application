@@ -5,6 +5,7 @@ const initState = {
   comingSoon: [],
   upcoming: [],
   topRated: [],
-  search: []
+  search: [],
+  movieInfo: {}
 };
 export default initState;

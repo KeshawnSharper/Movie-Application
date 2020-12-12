@@ -61,3 +61,14 @@ export function getTopRated() {
       });
   };
 }
+export function getMovieInfo(id) {
+  return (dispatch) => {
+    axios
+      .get(
+        `https://api.themoviedb.org/3/movie/${id}?api_key=bab5bd152949b76eccda9216965fc0f1&language=en-US`
+      )
+      .then((res) => {
+        dispatch({ type: "GET_MOVIE_INFO", movieInfo: res.data });
+      });
+  };
+}

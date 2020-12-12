@@ -32,6 +32,11 @@ export const StoreReducer = (state = initState, action) => {
         ...state,
         search: [action.search]
       };
+    case "GET_MOVIE_INFO":
+      return {
+        ...state,
+        movieInfo: action.movieInfo
+      };
     default:
       return initState;
   }
