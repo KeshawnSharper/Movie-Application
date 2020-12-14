@@ -13,6 +13,7 @@ export default class Facebook extends Component {
     console.log("clicked");
   };
   responseFacebook = (response) => {
+    this.props.SubmitFacebookUser(response);
     console.log(response);
   };
   render() {
