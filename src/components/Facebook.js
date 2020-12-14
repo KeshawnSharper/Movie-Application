@@ -23,6 +23,8 @@ export default class Facebook extends Component {
       fbContent = (
         <FacebookLogin
           appId="444504393243096"
+          buttonText="Facebook"
+          height="50%"
           autoLoad={true}
           fields="name,email,picture"
           onClick={this.componentClicked}
@@ -30,6 +32,6 @@ export default class Facebook extends Component {
         />
       );
     }
-    return <div>{fbContent}</div>;
+    return <div style={{ width: "50%", height: "50%" }}>{fbContent}</div>;
   }
 }
