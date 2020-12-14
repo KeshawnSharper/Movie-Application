@@ -106,7 +106,9 @@ export default class Login extends Component {
                     this.state.facebookUser.id
                   )}`
                 )
-                .then((res) => console.log(res.data));
+                .then((res) => {
+                  console.log(res.data);
+                });
             });
         } else {
           axios
