@@ -12,7 +12,8 @@ import {
   getTopRated,
   getPopular,
   getUpcoming,
-  getFavorites
+  getFavorites,
+  getRecommended
 } from "./actions/actions";
 import ProtectedRoute from "./components/ProtectedRoute";
 import {
@@ -34,6 +35,7 @@ function App(props) {
     props.getUpcoming();
     props.getTopRated();
     props.getFavorites();
+    props.getRecommended();
   }, []);
   return (
     <div className="App">
@@ -79,7 +81,7 @@ function App(props) {
           <Route exact path="/login">
             <Login history={useHistory()} />
           </Route>
-          <Route exact path="/home" component={Home} />
+          <ProtectedRoute exact path="/home" component={Home} />
           {/* <Route exact path="/search/:num" component={Search} />
     //     <Route exact path="/product/:num" component={Product} /> */}
         </Switch>
@@ -94,7 +96,8 @@ function mapStateToProps(state) {
     nowPlaying: state.nowPlaying,
     upcoming: state.upcoming,
     topRated: state.topRated,
-    favorites: state.favorites
+    favorites: state.favorites,
+    recommended: state.recommended
   };
 }
 const mapDispatchToProps = (dispatch) => {
@@ -113,6 +116,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     getFavorites: () => {
       dispatch(getFavorites());
+    },
+    getRecommended: () => {
+      dispatch(getRecommended());
     }
   };
 };

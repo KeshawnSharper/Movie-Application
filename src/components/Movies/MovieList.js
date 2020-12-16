@@ -33,7 +33,8 @@ const MovieList = (props) => {
     movieList,
     upcoming,
     topRated,
-    favorites
+    favorites,
+    recommended
   } = props;
   const classes = useStyles();
   console.log(movieList);
@@ -47,7 +48,7 @@ const MovieList = (props) => {
               <>
                 {nowPlaying[0].results.map((movie) => (
                   <Grid item xs={12} md={4} spacing={12}>
-                    <MovieCard movie={movie} />
+                    <MovieCard favorite={false} movie={movie} />
                   </Grid>
                 ))}
               </>
@@ -61,7 +62,7 @@ const MovieList = (props) => {
               <>
                 {popular[0].results.map((movie) => (
                   <Grid item xs={12} md={4} spacing={12}>
-                    <MovieCard movie={movie} />
+                    <MovieCard favorite={false} movie={movie} />
                   </Grid>
                 ))}
               </>
@@ -89,7 +90,7 @@ const MovieList = (props) => {
               <>
                 {topRated[0].results.map((movie) => (
                   <Grid item xs={12} md={4} spacing={12}>
-                    <MovieCard movie={movie} />
+                    <MovieCard favorite={false} movie={movie} />
                   </Grid>
                 ))}
               </>
@@ -103,7 +104,7 @@ const MovieList = (props) => {
               <>
                 {search[0].results.map((movie) => (
                   <Grid item xs={12} md={4} spacing={12}>
-                    <MovieCard movie={movie} />
+                    <MovieCard favorite={false} movie={movie} />
                   </Grid>
                 ))}
               </>
@@ -117,7 +118,21 @@ const MovieList = (props) => {
               <>
                 {favorites.map((movie) => (
                   <Grid item xs={12} md={4} spacing={12}>
-                    <MovieCard movie={movie} />
+                    <MovieCard favorite={true} movie={movie} />
+                  </Grid>
+                ))}
+              </>
+            ) : (
+              <div></div>
+            )}
+          </>
+        ) : movieList === "recommended" ? (
+          <>
+            {recommended ? (
+              <>
+                {recommended.map((movie) => (
+                  <Grid item xs={12} md={4} spacing={12}>
+                    <MovieCard favorite={false} movie={movie} />
                   </Grid>
                 ))}
               </>
@@ -140,7 +155,8 @@ function mapStateToProps(state) {
     upcoming: state.upcoming,
     topRated: state.topRated,
     search: state.search,
-    favorites: state.favorites
+    favorites: state.favorites,
+    recommended: state.recommended
   };
 }
 const mapDispatchToProps = (dispatch) => {

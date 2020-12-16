@@ -54,6 +54,26 @@ export const StoreReducer = (state = initState, action) => {
           return favorite.movie_id !== action.movie;
         })
       };
+    case "ADD_RECOMMEDED":
+      return {
+        ...state,
+        recommended: [...state.recommended, action.recommendation]
+      };
+    case "GET_RECOMMEDED":
+      return {
+        ...state,
+        recommended: action.recommended
+      };
+
+    case "DELETE_RECOMMENDED":
+      return {
+        ...state,
+        recommended: state.recommended.filter((recommendation) => {
+          return (
+            recommendation.recommended_movie_id !== action.recommended_movie
+          );
+        })
+      };
     default:
       return initState;
   }

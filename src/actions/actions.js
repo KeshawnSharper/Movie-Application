@@ -85,7 +85,17 @@ export function getFavorites() {
       });
   };
 }
-
+export function getRecommended() {
+  return (dispatch) => {
+    axios
+      .get(
+        `http://localhost:5000/recommendedMovies/${localStorage.getItem("id")}`
+      )
+      .then((res) => {
+        dispatch({ type: "GET_RECOMMEDED", recommended: res.data });
+      });
+  };
+}
 export function addFavorite(movie) {
   let new_movie = {
     user_id: Number(localStorage.getItem("id")),
@@ -96,7 +106,11 @@ export function addFavorite(movie) {
     overview: movie.overview,
     release_date: movie.release_date
   };
+
   return (dispatch) => {
+    console.log(movie);
+    addRecommedations(movie.id);
+
     axios.post(`http://localhost:5000/saveMovies`, new_movie).then((res) => {
       dispatch({ type: "ADD_FAVORITE", new_movie: new_movie });
     });
@@ -112,6 +126,59 @@ export function deleteFavorite(id) {
       )
       .then((res) => {
         dispatch({ type: "DELETE_FAVORITE", movie: id });
+      });
+  };
+}
+export function addRecommedations(movie_id) {
+  let recommendations = [];
+  // let new_movie = {
+  //     user_id: Number(localStorage.getItem("id")),
+  //     movie_id: recommendation.id,
+  //     title: recommendation.title,
+  //     poster_path: recommendation.poster_path,
+  //     vote_average: recommendation.vote_average,
+  //     overview: recommendation.overview,
+  //     recommended_movie_id: movie_id,
+  //     release_date: recommendation.release_date
+  // }
+  axios
+    .get(
+      `https://api.themoviedb.org/3/movie/${movie_id}/recommendations?api_key=bab5bd152949b76eccda9216965fc0f1&language=en-US&page=1`
+    )
+    .then((res) => {
+      res.data.results.map((result) => {
+        recommedations(result, movie_id);
+      });
+    });
+}
+export function recommedations(movie, recommended_movie) {
+  let new_movie = {
+    user_id: Number(localStorage.getItem("id")),
+    movie_id: movie.id,
+    title: movie.title,
+    poster_path: movie.poster_path,
+    vote_average: movie.vote_average,
+    overview: movie.overview,
+    recommended_movie_id: recommended_movie,
+    release_date: movie.release_date
+  };
+
+  axios
+    .post(`http://localhost:5000/recommendedMovies`, new_movie)
+    .then((res) => {
+      console.log(res.data);
+    });
+}
+export function deleteRecommedations(movie_id) {
+  return (dispatch) => {
+    axios
+      .delete(
+        `http://localhost:5000/recommendedMovies/${movie_id}/${Number(
+          localStorage.getItem("id")
+        )}`
+      )
+      .then((res) => {
+        dispatch({ type: "DELETE_RECOMMENDED", recommended_movie: movie_id });
       });
   };
 }

@@ -117,7 +117,15 @@ class Home extends Component {
               }}
               className={this.state.movieList === "favorites" ? "active" : ""}
             >
-              favorites
+              saved
+            </li>
+            <li
+              onClick={() => {
+                this.setState({ movieList: "recommended" });
+              }}
+              className={this.state.movieList === "recommended" ? "active" : ""}
+            >
+              recommended
             </li>
             <li
               onClick={() => {

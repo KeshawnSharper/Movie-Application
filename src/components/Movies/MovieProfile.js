@@ -11,7 +11,9 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import {
   getMovieInfo,
   addFavorite,
-  deleteFavorite
+  deleteFavorite,
+  getRecommended,
+  deleteRecommedations
 } from "../../actions/actions";
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -47,6 +49,7 @@ const MovieProfile = (props) => {
     movieInfo,
     stars_earned,
     stars_not_earned,
+    favorite,
     favorites
   } = props;
   const [open, setOpen] = useState(false);
@@ -111,16 +114,24 @@ const MovieProfile = (props) => {
 
         {favorites.filter((favorite) => {
           return favorite.movie_id === Number(movie.id);
-        }).length > 0 ? (
+        }).length > 0 || favorite ? (
           <FontAwesomeIcon
             icon={faHeart}
-            onClick={() => props.deleteFavorite(movie.id)}
+            onClick={() => {
+              props.deleteFavorite(movie.movie_id);
+              props.deleteRecommedations(movie.movie_id);
+            }}
             color="red"
           />
         ) : (
           <FontAwesomeIcon
             icon={faHeart}
-            onClick={() => props.addFavorite(movie)}
+            onClick={() => {
+              props.addFavorite(movie);
+              setTimeout(function () {
+                props.getRecommended();
+              }, 5000);
+            }}
             color="white"
           />
         )}
@@ -139,7 +150,8 @@ const MovieProfile = (props) => {
 function mapStateToProps(state) {
   return {
     movieInfo: state.movieInfo,
-    favorites: state.favorites
+    favorites: state.favorites,
+    recommended: state.recommended
   };
 }
 const mapDispatchToProps = (dispatch) => {
@@ -152,6 +164,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     deleteFavorite: (id) => {
       dispatch(deleteFavorite(id));
+    },
+    getRecommended: () => {
+      dispatch(getRecommended());
+    },
+    deleteRecommedations: (movie_id) => {
+      dispatch(deleteRecommedations(movie_id));
     }
   };
 };

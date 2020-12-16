@@ -7,6 +7,7 @@ const initState = {
   topRated: [],
   search: [],
   movieInfo: {},
-  favorites: []
+  favorites: [],
+  recommended: []
 };
 export default initState;
