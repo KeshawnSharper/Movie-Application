@@ -37,6 +37,23 @@ export const StoreReducer = (state = initState, action) => {
         ...state,
         movieInfo: action.movieInfo
       };
+    case "GET_FAVORITES":
+      return {
+        ...state,
+        favorites: action.favorites
+      };
+    case "ADD_FAVORITE":
+      return {
+        ...state,
+        favorites: [...state.favorites, action.new_movie]
+      };
+    case "DELETE_FAVORITE":
+      return {
+        ...state,
+        favorites: state.favorites.filter((favorite) => {
+          return favorite.movie_id !== action.movie;
+        })
+      };
     default:
       return initState;
   }

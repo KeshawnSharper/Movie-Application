@@ -7,7 +7,12 @@ import "./MovieProfile.scss";
 import axios from "axios";
 import Loader from "../Loader/Loader";
 import { connect } from "react-redux";
-import { getMovieInfo } from "../../actions/actions";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import {
+  getMovieInfo,
+  addFavorite,
+  deleteFavorite
+} from "../../actions/actions";
 function rand() {
   return Math.round(Math.random() * 20) - 10;
 }
@@ -41,7 +46,8 @@ const MovieProfile = (props) => {
     getMovieInfo,
     movieInfo,
     stars_earned,
-    stars_not_earned
+    stars_not_earned,
+    favorites
   } = props;
   const [open, setOpen] = useState(false);
   const [modalStyle] = useState(getModalStyle);
@@ -102,6 +108,22 @@ const MovieProfile = (props) => {
           <FontAwesomeIcon icon={faStar} color="white" />
         ))}
         <p>{movie.overview}</p>
+
+        {favorites.filter((favorite) => {
+          return favorite.movie_id === Number(movie.id);
+        }).length > 0 ? (
+          <FontAwesomeIcon
+            icon={faHeart}
+            onClick={() => props.deleteFavorite(movie.id)}
+            color="red"
+          />
+        ) : (
+          <FontAwesomeIcon
+            icon={faHeart}
+            onClick={() => props.addFavorite(movie)}
+            color="white"
+          />
+        )}
       </div>
       <Modal
         open={open}
@@ -116,13 +138,20 @@ const MovieProfile = (props) => {
 };
 function mapStateToProps(state) {
   return {
-    movieInfo: state.movieInfo
+    movieInfo: state.movieInfo,
+    favorites: state.favorites
   };
 }
 const mapDispatchToProps = (dispatch) => {
   return {
     getMovieInfo: (movie) => {
       dispatch(getMovieInfo(movie));
+    },
+    addFavorite: (id) => {
+      dispatch(addFavorite(id));
+    },
+    deleteFavorite: (id) => {
+      dispatch(deleteFavorite(id));
     }
   };
 };

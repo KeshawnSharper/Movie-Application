@@ -7,6 +7,7 @@ import axios from "axios";
 export default class Login extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       isGoogleValidated: false,
       isFacebookValidated: false,
@@ -29,9 +30,18 @@ export default class Login extends Component {
     });
   };
   Login = () => {
-    axios
-      .post(`http://localhost:5000/login`, this.state.user)
-      .then((res) => console.log(res.data));
+    axios.post(`http://localhost:5000/login`, this.state.user).then((res) => {
+      console.log(res.data);
+      localStorage.setItem(`token`, res.data.token);
+      localStorage.setItem(`id`, res.data.userid);
+      localStorage.setItem(`email`, res.data.email);
+      localStorage.setItem(`picture`, res.data.picture);
+      localStorage.setItem(`first_name`, res.data.first_name);
+      localStorage.setItem(`last_name`, res.data.last_name);
+      localStorage.setItem(`user_name`, res.data.user_name);
+      this.props.history.push("/home");
+      window.location.reload(false);
+    });
   };
   SubmitGoogleUser = (user) => {
     this.setState({ googleUser: user });
@@ -64,7 +74,18 @@ export default class Login extends Component {
                     this.state.googleUser.profileObj.googleId
                   )}`
                 )
-                .then((res) => console.log(res.data));
+                .then((res) => {
+                  localStorage.setItem(`google_id`, res.data.google_id);
+                  localStorage.setItem(`token`, res.data.token);
+                  localStorage.setItem(`id`, res.data.userid);
+                  localStorage.setItem(`email`, res.data.google_email);
+                  localStorage.setItem(`picture`, res.data.picture);
+                  localStorage.setItem(`first_name`, res.data.first_name);
+                  localStorage.setItem(`last_name`, res.data.last_name);
+                  localStorage.setItem(`user_name`, res.data.user_name);
+                  this.props.history.push("/home");
+                  window.location.reload(false);
+                });
             });
         } else {
           axios
@@ -73,7 +94,19 @@ export default class Login extends Component {
                 this.state.googleUser.profileObj.googleId
               )}`
             )
-            .then((res) => console.log(res.data));
+            .then((res) => {
+              localStorage.setItem(`google_id`, res.data.google_id);
+              localStorage.setItem(`token`, res.data.token);
+              localStorage.setItem(`id`, res.data.userid);
+              localStorage.setItem(`email`, res.data.google_email);
+              localStorage.setItem(`picture`, res.data.picture);
+              localStorage.setItem(`first_name`, res.data.first_name);
+              localStorage.setItem(`last_name`, res.data.last_name);
+              localStorage.setItem(`last_name`, res.data.last_name);
+              localStorage.setItem(`user_name`, res.data.user_name);
+              this.props.history.push("/home");
+              window.location.reload(false);
+            });
         }
       });
   };
@@ -107,7 +140,17 @@ export default class Login extends Component {
                   )}`
                 )
                 .then((res) => {
-                  console.log(res.data);
+                  localStorage.setItem(`facebook_id`, res.data.facebook_id);
+                  localStorage.setItem(`token`, res.data.token);
+                  localStorage.setItem(`id`, res.data.userid);
+                  localStorage.setItem(`email`, res.data.facebook_email);
+                  localStorage.setItem(`picture`, res.data.picture);
+                  localStorage.setItem(`first_name`, res.data.first_name);
+                  localStorage.setItem(`last_name`, res.data.last_name);
+                  localStorage.setItem(`last_name`, res.data.last_name);
+                  localStorage.setItem(`user_name`, res.data.user_name);
+                  this.props.history.push("/home");
+                  window.location.reload(false);
                 });
             });
         } else {
@@ -117,7 +160,18 @@ export default class Login extends Component {
                 this.state.facebookUser.id
               )}`
             )
-            .then((res) => console.log(res.data));
+            .then((res) => {
+              localStorage.setItem(`facebook_id`, res.data.facebook_id);
+              localStorage.setItem(`token`, res.data.token);
+              localStorage.setItem(`id`, res.data.userid);
+              localStorage.setItem(`email`, res.data.facebook_email);
+              localStorage.setItem(`picture`, res.data.picture);
+              localStorage.setItem(`first_name`, res.data.first_name);
+              localStorage.setItem(`last_name`, res.data.last_name);
+              localStorage.setItem(`user_name`, res.data.user_name);
+              this.props.history.push("/home");
+              window.location.reload(false);
+            });
         }
       });
   };

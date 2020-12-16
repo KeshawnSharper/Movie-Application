@@ -4,6 +4,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import MovieCard from "./MovieCard";
 import { connect } from "react-redux";
+
 import {
   getNowPlaying,
   getTopRated,
@@ -31,7 +32,8 @@ const MovieList = (props) => {
     popular,
     movieList,
     upcoming,
-    topRated
+    topRated,
+    favorites
   } = props;
   const classes = useStyles();
   console.log(movieList);
@@ -109,6 +111,20 @@ const MovieList = (props) => {
               <div></div>
             )}
           </>
+        ) : movieList === "favorites" ? (
+          <>
+            {favorites ? (
+              <>
+                {favorites.map((movie) => (
+                  <Grid item xs={12} md={4} spacing={12}>
+                    <MovieCard movie={movie} />
+                  </Grid>
+                ))}
+              </>
+            ) : (
+              <div></div>
+            )}
+          </>
         ) : (
           <></>
         )}
@@ -123,7 +139,8 @@ function mapStateToProps(state) {
     popular: state.popular,
     upcoming: state.upcoming,
     topRated: state.topRated,
-    search: state.search
+    search: state.search,
+    favorites: state.favorites
   };
 }
 const mapDispatchToProps = (dispatch) => {

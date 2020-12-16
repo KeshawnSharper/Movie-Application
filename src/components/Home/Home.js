@@ -113,6 +113,14 @@ class Home extends Component {
             </li>
             <li
               onClick={() => {
+                this.setState({ movieList: "favorites" });
+              }}
+              className={this.state.movieList === "favorites" ? "active" : ""}
+            >
+              favorites
+            </li>
+            <li
+              onClick={() => {
                 this.setState({ movieList: "search" });
               }}
               className={this.state.movieList === "search" ? "active" : ""}
@@ -171,7 +179,8 @@ function mapStateToProps(state) {
     popular: state.popular,
     upcoming: state.upcoming,
     topRated: state.topRated,
-    search: state.search
+    search: state.search,
+    favorites: state.favorites
   };
 }
 const mapDispatchToProps = (dispatch) => {

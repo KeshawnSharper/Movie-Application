@@ -72,3 +72,46 @@ export function getMovieInfo(id) {
       });
   };
 }
+export function getFavorites() {
+  return (dispatch) => {
+    axios
+      .get(
+        `http://localhost:5000/savedMovies/${Number(
+          localStorage.getItem("id")
+        )}`
+      )
+      .then((res) => {
+        dispatch({ type: "GET_FAVORITES", favorites: res.data });
+      });
+  };
+}
+
+export function addFavorite(movie) {
+  let new_movie = {
+    user_id: Number(localStorage.getItem("id")),
+    movie_id: movie.id,
+    title: movie.title,
+    poster_path: movie.poster_path,
+    vote_average: movie.vote_average,
+    overview: movie.overview,
+    release_date: movie.release_date
+  };
+  return (dispatch) => {
+    axios.post(`http://localhost:5000/saveMovies`, new_movie).then((res) => {
+      dispatch({ type: "ADD_FAVORITE", new_movie: new_movie });
+    });
+  };
+}
+export function deleteFavorite(id) {
+  return (dispatch) => {
+    axios
+      .delete(
+        `http://localhost:5000/deleteMovie/${id}/${Number(
+          localStorage.getItem("id")
+        )}`
+      )
+      .then((res) => {
+        dispatch({ type: "DELETE_FAVORITE", movie: id });
+      });
+  };
+}
