@@ -30,30 +30,34 @@ export default class Login extends Component {
     });
   };
   Login = () => {
-    axios.post(`http://localhost:5000/login`, this.state.user).then((res) => {
-      console.log(res.data);
-      localStorage.setItem(`token`, res.data.token);
-      localStorage.setItem(`id`, res.data.userid);
-      localStorage.setItem(`email`, res.data.email);
-      localStorage.setItem(`picture`, res.data.picture);
-      localStorage.setItem(`first_name`, res.data.first_name);
-      localStorage.setItem(`last_name`, res.data.last_name);
-      localStorage.setItem(`user_name`, res.data.user_name);
-      this.props.history.push("/home");
-      window.location.reload(false);
-    });
+    axios
+      .post(`https://movieapplication1.herokuapp.com/login`, this.state.user)
+      .then((res) => {
+        console.log(res.data);
+        localStorage.setItem(`token`, res.data.token);
+        localStorage.setItem(`id`, res.data.userid);
+        localStorage.setItem(`email`, res.data.email);
+        localStorage.setItem(`picture`, res.data.picture);
+        localStorage.setItem(`first_name`, res.data.first_name);
+        localStorage.setItem(`last_name`, res.data.last_name);
+        localStorage.setItem(`user_name`, res.data.user_name);
+        this.props.history.push("/home");
+        window.location.reload(false);
+      });
   };
   SubmitGoogleUser = (user) => {
     this.setState({ googleUser: user });
     console.log(this.state.googleUser);
     axios
-      .get(`http://localhost:5000/googleuser/${this.state.googleUser.Ca}`)
+      .get(
+        `https://movieapplication1.herokuapp.com/googleuser/${this.state.googleUser.Ca}`
+      )
       .then((res) => {
         this.setState({ isGoogleValidated: res.data });
         console.log(this.state.isGoogleValidated);
         if (!this.state.isGoogleValidated) {
           axios
-            .post(`http://localhost:5000/register`, {
+            .post(`https://movieapplication1.herokuapp.com/register`, {
               user_name:
                 this.state.googleUser.profileObj.givenName +
                 "_" +
@@ -70,7 +74,7 @@ export default class Login extends Component {
             .then((res) => {
               axios
                 .post(
-                  `http://localhost:5000/loginGoogle/${Number(
+                  `https://movieapplication1.herokuapp.com/loginGoogle/${Number(
                     this.state.googleUser.profileObj.googleId
                   )}`
                 )
@@ -90,7 +94,7 @@ export default class Login extends Component {
         } else {
           axios
             .post(
-              `http://localhost:5000/loginGoogle/${Number(
+              `https://movieapplication1.herokuapp.com/loginGoogle/${Number(
                 this.state.googleUser.profileObj.googleId
               )}`
             )
@@ -115,13 +119,15 @@ export default class Login extends Component {
     this.setState({ facebookUser: user });
     console.log("hello", this.state.facebookUser);
     axios
-      .get(`http://localhost:5000/facebookuser/${this.state.facebookUser.id}`)
+      .get(
+        `https://movieapplication1.herokuapp.com/facebookuser/${this.state.facebookUser.id}`
+      )
       .then((res) => {
         this.setState({ isFacebookValidated: res.data });
         console.log(this.state.isFacebookValidated);
         if (!this.state.isFacebookValidated) {
           axios
-            .post(`http://localhost:5000/register`, {
+            .post(`https://movieapplication1.herokuapp.com/register`, {
               user_name: this.state.facebookUser.name,
               first_name: this.state.facebookUser.name,
               last_name: this.state.facebookUser.name,
@@ -135,7 +141,7 @@ export default class Login extends Component {
             .then((res) => {
               axios
                 .post(
-                  `http://localhost:5000/loginFacebook/${Number(
+                  `https://movieapplication1.herokuapp.com/loginFacebook/${Number(
                     this.state.facebookUser.id
                   )}`
                 )
@@ -156,7 +162,7 @@ export default class Login extends Component {
         } else {
           axios
             .post(
-              `http://localhost:5000/loginFacebook/${Number(
+              `https://movieapplication1.herokuapp.com/loginFacebook/${Number(
                 this.state.facebookUser.id
               )}`
             )

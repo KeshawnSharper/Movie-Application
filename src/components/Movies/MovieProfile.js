@@ -49,13 +49,18 @@ const MovieProfile = (props) => {
     movieInfo,
     stars_earned,
     stars_not_earned,
-    favorite,
+    list,
     favorites
   } = props;
   const [open, setOpen] = useState(false);
   const [modalStyle] = useState(getModalStyle);
   const handleOpen = () => {
-    getMovieInfo(movie.id);
+    if (list === "favorites" || list === "recommended") {
+      getMovieInfo(movie.movie_id);
+    } else {
+      getMovieInfo(movie.id);
+    }
+
     setOpen(!open);
   };
   const body = (
@@ -114,7 +119,7 @@ const MovieProfile = (props) => {
 
         {favorites.filter((favorite) => {
           return favorite.movie_id === Number(movie.id);
-        }).length > 0 || favorite ? (
+        }).length > 0 || list === "favorite" ? (
           <FontAwesomeIcon
             icon={faHeart}
             onClick={() => {

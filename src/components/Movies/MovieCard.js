@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 export default class MovieCard extends Component {
   render() {
-    const { movie, favorite } = this.props;
+    const { movie, list } = this.props;
     let stars_earned = [];
     let stars_not_earned = [];
     for (let i = 1; i <= 5 - (10 - Math.floor(movie.vote_average)); i++) {
@@ -31,7 +31,7 @@ export default class MovieCard extends Component {
           <div className="flip-card-back" style={{ backgroundColor: "black" }}>
             <MovieProfile
               movie={movie}
-              favorite={favorite}
+              list={list}
               stars_earned={stars_earned}
               stars_not_earned={stars_not_earned}
             />

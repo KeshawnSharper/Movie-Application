@@ -74,6 +74,16 @@ export const StoreReducer = (state = initState, action) => {
           );
         })
       };
+    case "GET_USER":
+      return {
+        ...state,
+        user: action.user
+      };
+    case "UPDATE_USER":
+      return {
+        ...state,
+        user: action.updated_user
+      };
     default:
       return initState;
   }
