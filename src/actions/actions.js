@@ -198,6 +198,9 @@ export function getUser() {
         )}`
       )
       .then((res) => {
+        if (res.data === []) {
+          localStorage.clear();
+        }
         dispatch({ type: "GET_USER", user: res.data[0] });
       });
   };

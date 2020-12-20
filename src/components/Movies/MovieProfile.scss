@@ -12,6 +12,10 @@ html, body{
   font-size: 14px;
   font-weight: 400;
 }
+h1:hover{
+  cursor: pointer;
+  text-decoration: underline;
+} 
 
 .movie_card{
   position: relative;
@@ -22,6 +26,7 @@ html, body{
   overflow: hidden;
   border-radius: 10px;
   transition: all 0.4s;
+
   &:hover{
     transform: scale(1.02);
     transition: all 0.4s;
@@ -41,7 +46,8 @@ html, body{
         color: #fff;
         font-weight: 400;
       }
-      h4{
+         
+       h4{
         color: #9ac7fa;
         font-weight: 400;
       }

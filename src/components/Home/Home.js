@@ -51,16 +51,14 @@ class Home extends Component {
             {/*user end*/}
           </nav>
           <div className="movie-info">
-            <h1>the martian</h1>
+            <h2>the martian</h2>
             <ul className="genre">
               <li>adventure</li>
               <li>sci-fi</li>
               <li>thriller</li>
             </ul>
             {/*genre*/}
-            <button>
-              watch trailer <i className="fa fa-play-circle-o" />
-            </button>
+
             <h3>In theaters</h3>
             <h4>15 Oct, 2015 (USA)</h4>
           </div>

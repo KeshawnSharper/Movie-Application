@@ -126,6 +126,7 @@ const MovieProfile = (props) => {
               props.deleteFavorite(movie.movie_id);
               props.deleteRecommedations(movie.movie_id);
             }}
+            style={{ cursor: "pointer" }}
             color="red"
           />
         ) : (
@@ -137,6 +138,7 @@ const MovieProfile = (props) => {
                 props.getRecommended();
               }, 5000);
             }}
+            style={{ cursor: "pointer" }}
             color="white"
           />
         )}

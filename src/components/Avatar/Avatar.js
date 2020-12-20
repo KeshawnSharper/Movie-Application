@@ -5,6 +5,7 @@ import Modal from "@material-ui/core/Modal";
 import axios from "axios";
 import { connect } from "react-redux";
 import { editUser } from "../../actions/actions";
+import "./Avatar.css";
 function rand() {
   return Math.round(Math.random() * 20) - 10;
 }
@@ -38,6 +39,7 @@ function Avatar(props) {
     picture: "",
     user_name: ""
   });
+  let [isLoading, setIsLoading] = useState(false);
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = useState(getModalStyle);
@@ -71,9 +73,13 @@ function Avatar(props) {
     let formData = new FormData();
     formData.append("file", e[0]);
     formData.append("upload_preset", "zdtazmlq");
+    setIsLoading(true);
+
     axios
       .post(`https://api.cloudinary.com/v1_1/di449masi/image/upload`, formData)
       .then((res) => {
+        setIsLoading(false);
+
         console.log(res.data);
         setUpdatedUser({
           ...updatedUser,
@@ -93,41 +99,50 @@ function Avatar(props) {
   const submitEditUser = (e) => {
     e.preventDefault();
     editUser(updatedUser);
+    handleClose();
   };
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <form>
-        <div style={{ display: "inline-flex" }}>
-          First Name :
-          <input
-            onChange={(e) => handleChange(e)}
-            value={updatedUser.first_name}
-            name={"first_name"}
-          />
-        </div>
-        <div style={{ display: "inline-flex" }}>
-          Last Name :
-          <input
-            onChange={(e) => handleChange(e)}
-            value={updatedUser.last_name}
-            name={"last_name"}
-          />
-        </div>
-        <div style={{ display: "inline-flex" }}>
-          User name :
-          <input
-            onChange={(e) => handleChange(e)}
-            value={updatedUser.user_name}
-            name={"user_name"}
-          />
-        </div>
-        <input onChange={(e) => uploadFile(e.target.files)} type="file" />
-        <br />
-        <button style={{ marginRight: "200px" }} onClick={reset}>
-          Reset{" "}
-        </button>
-        <button onClick={(e) => submitEditUser(e)}>Submit </button>
-      </form>
+      {isLoading ? (
+        <div class="loader"></div>
+      ) : (
+        <form>
+          <div style={{ display: "inline-flex" }}>
+            First Name :
+            <input
+              onChange={(e) => handleChange(e)}
+              value={updatedUser.first_name}
+              name={"first_name"}
+            />
+          </div>
+          <div style={{ display: "inline-flex" }}>
+            Last Name :
+            <input
+              onChange={(e) => handleChange(e)}
+              value={updatedUser.last_name}
+              name={"last_name"}
+            />
+          </div>
+          <div style={{ display: "inline-flex" }}>
+            User name :
+            <input
+              onChange={(e) => handleChange(e)}
+              value={updatedUser.user_name}
+              name={"user_name"}
+            />
+          </div>
+          {user.picture === updatedUser.picture ? (
+            <input onChange={(e) => uploadFile(e.target.files)} type="file" />
+          ) : (
+            <p> Picture uploaded </p>
+          )}
+          <br />
+          <button style={{ marginRight: "200px" }} onClick={reset}>
+            Reset{" "}
+          </button>
+          <button onClick={(e) => submitEditUser(e)}>Submit </button>
+        </form>
+      )}
     </div>
   );
   return (
