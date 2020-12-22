@@ -31,13 +31,15 @@ function App(props) {
     console.log("App", props);
     console.log("history", history);
 
-    props.getNowPlaying();
-    props.getPopular();
-    props.getUpcoming();
-    props.getTopRated();
-    props.getFavorites();
-    props.getRecommended();
     props.getUser();
+    
+      props.getNowPlaying();
+      props.getPopular();
+      props.getUpcoming();
+      props.getTopRated();
+      props.getFavorites();
+      props.getRecommended();
+    
   }, []);
   return (
     <div className="App">

@@ -80,7 +80,6 @@ function Avatar(props) {
       .then((res) => {
         setIsLoading(false);
 
-        console.log(res.data);
         setUpdatedUser({
           ...updatedUser,
           picture: res.data.url

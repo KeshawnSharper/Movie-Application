@@ -28,18 +28,16 @@ export default class Register extends Component {
         [e.target.name]: e.target.value
       }
     });
-    console.log(this.state.user);
   };
   handleSubmit = () => {
     axios
       .post("https://movieapplication1.herokuapp.com/register", this.state.user)
       .then((res) => {
-        axios
-          .post("https://movieapplication1.herokuapp.com/login", {
-            email: this.state.user.email,
-            password: this.state.user.password
-          })
-          .then((res) => console.log(res.data));
+        axios.post("https://movieapplication1.herokuapp.com/login", {
+          email: this.state.user.email,
+          password: this.state.user.password
+        });
+        // .then((res) => console.log(res.data));
       });
   };
   render() {

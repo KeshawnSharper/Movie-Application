@@ -21,7 +21,6 @@ export default class Login extends Component {
   }
 
   handleChange = (e) => {
-    console.log(this.state.user);
     this.setState({
       user: {
         ...this.state.user,
@@ -33,7 +32,6 @@ export default class Login extends Component {
     axios
       .post(`https://movieapplication1.herokuapp.com/login`, this.state.user)
       .then((res) => {
-        console.log(res.data);
         localStorage.setItem(`token`, res.data.token);
         localStorage.setItem(`id`, res.data.userid);
         localStorage.setItem(`email`, res.data.email);
@@ -47,7 +45,6 @@ export default class Login extends Component {
   };
   SubmitGoogleUser = (user) => {
     this.setState({ googleUser: user });
-    console.log(this.state.googleUser);
     axios
       .get(
         `https://movieapplication1.herokuapp.com/googleuser/${this.state.googleUser.Ca}`
@@ -117,14 +114,12 @@ export default class Login extends Component {
 
   SubmitFacebookUser = (user) => {
     this.setState({ facebookUser: user });
-    console.log("hello", this.state.facebookUser);
     axios
       .get(
         `https://movieapplication1.herokuapp.com/facebookuser/${this.state.facebookUser.id}`
       )
       .then((res) => {
         this.setState({ isFacebookValidated: res.data });
-        console.log(this.state.isFacebookValidated);
         if (!this.state.isFacebookValidated) {
           axios
             .post(`https://movieapplication1.herokuapp.com/register`, {

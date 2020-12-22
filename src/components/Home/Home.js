@@ -25,12 +25,8 @@ class Home extends Component {
     };
   }
 
-  componentClicked = () => {
-    console.log("clicked");
-  };
-  responseFacebook = (response) => {
-    console.log(response);
-  };
+  // componentClicked = () => {};
+  // responseFacebook = (response) => {};
   searchMovie = (event) => {
     this.props.getSearch(event.target.value);
   };

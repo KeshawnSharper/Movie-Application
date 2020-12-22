@@ -53,6 +53,28 @@ const MovieProfile = (props) => {
     favorites
   } = props;
   const [open, setOpen] = useState(false);
+
+  const [isFavorite, setIsFavorite] = useState(false);
+  useEffect(() => {
+    if (list === "favorites") {
+      setIsFavorite(true);
+    } else if (list === "recommended") {
+      setIsFavorite(
+        favorites.filter((favorite) => {
+          return favorite.movie_id === Number(movie.movie_id);
+        }).length > 0
+      );
+    } else {
+      console.log(movie.id);
+      setIsFavorite(
+        favorites.filter((favorite) => {
+          return favorite.movie_id === Number(movie.id);
+        }).length > 0
+      );
+      console.log(isFavorite);
+    }
+  }, []);
+
   const [modalStyle] = useState(getModalStyle);
   const handleOpen = () => {
     if (list === "favorites" || list === "recommended") {
@@ -117,9 +139,67 @@ const MovieProfile = (props) => {
         ))}
         <p>{movie.overview}</p>
 
-        {favorites.filter((favorite) => {
+        {/* {favorites.filter((favorite) => {
           return favorite.movie_id === Number(movie.id);
-        }).length > 0 || list === "favorite" ? (
+        }).length > 0 && list !== "favorite" && list !==  ? (
+          <FontAwesomeIcon
+            icon={faHeart}
+            onClick={() => {
+              props.deleteFavorite(movie.id);
+              props.deleteRecommedations(movie.id);
+            }}
+            style={{ cursor: "pointer" }}
+            color="red"
+          />
+        ) 
+        
+        : 
+        list === "favorite" || list === "recommended"
+        <FontAwesomeIcon
+        icon={faHeart}
+        onClick={() => {
+          props.deleteFavorite(movie.movie_id);
+          props.deleteRecommedations(movie.movie_id);
+        }}
+        style={{ cursor: "pointer" }}
+        color="red"
+      />
+        :
+        (
+          <FontAwesomeIcon
+            icon={faHeart}
+            onClick={() => {
+              props.addFavorite(movie);
+              setTimeout(function () {
+                props.getRecommended();
+              }, 5000);
+            }}
+            style={{ cursor: "pointer" }}
+            color="white"
+          />
+        )} */}
+        {list === "recommended" ? (
+          <FontAwesomeIcon
+            icon={faHeart}
+            onClick={
+              !isFavorite
+                ? () => {
+                    setIsFavorite(!isFavorite);
+                    props.addFavorite(movie);
+                    setTimeout(function () {
+                      props.getRecommended();
+                    }, 5000);
+                  }
+                : () => {
+                    setIsFavorite(!isFavorite);
+                    props.deleteFavorite(movie.movie_id);
+                    props.deleteRecommedations(movie.movie_id);
+                  }
+            }
+            style={{ cursor: "pointer" }}
+            color={isFavorite ? "red" : "white"}
+          />
+        ) : list === "favorites" ? (
           <FontAwesomeIcon
             icon={faHeart}
             onClick={() => {
@@ -132,14 +212,23 @@ const MovieProfile = (props) => {
         ) : (
           <FontAwesomeIcon
             icon={faHeart}
-            onClick={() => {
-              props.addFavorite(movie);
-              setTimeout(function () {
-                props.getRecommended();
-              }, 5000);
-            }}
+            onClick={
+              !isFavorite
+                ? () => {
+                    setIsFavorite(!isFavorite);
+                    props.addFavorite(movie);
+                    setTimeout(function () {
+                      props.getRecommended();
+                    }, 5000);
+                  }
+                : () => {
+                    setIsFavorite(!isFavorite);
+                    props.deleteFavorite(movie.id);
+                    props.deleteRecommedations(movie.id);
+                  }
+            }
             style={{ cursor: "pointer" }}
-            color="white"
+            color={isFavorite ? "red" : "white"}
           />
         )}
       </div>
