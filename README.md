@@ -3,10 +3,10 @@
 # Movie-Application
 
 # Description : 
-A Movie Application that is built from a 3rd party movie API, Facebook and Google's oAuth API and a NodeJS server I made that allows users to login view movie data edit their user info or upload a new photo and save movies and get recommended movies.
+A Movie Application that lets you view movie data, save the movie into your favorites list delete it, and recommend movies as well.
 
 # Functionality : 
-You can either log in with my server or use your google or facebook which saves your user data to my server. Once logged in the user can now access the data brought by a 3rd party API. They could also upload a new profile photo via the cloudinary API whih saves the URL string to my server. Once you save a movie you can then access the a recommended list. Once you delete the movies that were recommended from the deleted will vanish as well. 
+You can either log in with my server or use your Google or Facebook which saves your user data to my server. Once logged in the user can now access the data brought by a 3rd party API. They could also upload a new profile photo via the Cloudinary API which saves the URL string to my server. Once you save a movie you can then access the recommended list. Once you delete the movies that were recommended from the deleted will vanish as well. 
 # Status:
 Complete
 
