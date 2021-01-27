@@ -13,7 +13,8 @@ import {
   getPopular,
   getUpcoming,
   getFavorites,
-  getRecommended
+  getRecommended,
+  getUser
 } from "./actions/actions";
 import ProtectedRoute from "./components/ProtectedRoute";
 import {
@@ -28,7 +29,6 @@ function App(props) {
   const [registeredUser, setRegisteredUser] = useState(false);
   useEffect(() => {
     console.log("App", props);
-    console.log("history", history);
 
     props.getNowPlaying();
     props.getPopular();
@@ -36,6 +36,8 @@ function App(props) {
     props.getTopRated();
     props.getFavorites();
     props.getRecommended();
+    props.getUser();
+
   }, []);
   return (
     <div className="App">
@@ -119,6 +121,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     getRecommended: () => {
       dispatch(getRecommended());
+    },
+    getUser: () => {
+      dispatch(getUser());
     }
   };
 };

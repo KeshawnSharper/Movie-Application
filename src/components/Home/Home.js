@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import FacebookLogin from "react-facebook-login";
 import "./Home.scss";
 import MovieList from "../Movies/MovieList";
+import Avatar from "../Avatar/Avatar";
 import {
   getNowPlaying,
   getTopRated,
@@ -42,19 +43,9 @@ class Home extends Component {
               className="logo"
               src="https://res.cloudinary.com/di449masi/image/upload/v1607614171/9d5deab5-3260-4f12-a491-a5926a7493bb_200x200_wwa6ys.png"
             />
-            <ul className="nav">
-              <li className="active">movies</li>
-              <li>celebs &amp; photos</li>
-              <li>community</li>
-              <li>news</li>
-            </ul>
-            <div className="user">
-              <i className="fa fa-gear user-settings" />
-              <img
-                className="user-icon"
-                src="https://s3.amazonaws.com/uifaces/faces/twitter/calebogden/128.jpg"
-              />
-            </div>
+           
+           <Avatar />
+
             {/*user end*/}
           </nav>
           <div className="movie-info">

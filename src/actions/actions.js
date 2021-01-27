@@ -76,7 +76,7 @@ export function getFavorites() {
   return (dispatch) => {
     axios
       .get(
-        `http://localhost:5000/savedMovies/${Number(
+        `https://movieapplication1.herokuapp.com/savedMovies/${Number(
           localStorage.getItem("id")
         )}`
       )
@@ -89,7 +89,7 @@ export function getRecommended() {
   return (dispatch) => {
     axios
       .get(
-        `http://localhost:5000/recommendedMovies/${localStorage.getItem("id")}`
+        `https://movieapplication1.herokuapp.com/recommendedMovies/${localStorage.getItem("id")}`
       )
       .then((res) => {
         dispatch({ type: "GET_RECOMMEDED", recommended: res.data });
@@ -111,7 +111,7 @@ export function addFavorite(movie) {
     console.log(movie);
     addRecommedations(movie.id);
 
-    axios.post(`http://localhost:5000/saveMovies`, new_movie).then((res) => {
+    axios.post(`https://movieapplication1.herokuapp.com/saveMovies`, new_movie).then((res) => {
       dispatch({ type: "ADD_FAVORITE", new_movie: new_movie });
     });
   };
@@ -120,7 +120,7 @@ export function deleteFavorite(id) {
   return (dispatch) => {
     axios
       .delete(
-        `http://localhost:5000/deleteMovie/${id}/${Number(
+        `https://movieapplication1.herokuapp.com/deleteMovie/${id}/${Number(
           localStorage.getItem("id")
         )}`
       )
@@ -164,7 +164,7 @@ export function recommedations(movie, recommended_movie) {
   };
 
   axios
-    .post(`http://localhost:5000/recommendedMovies`, new_movie)
+    .post(`https://movieapplication1.herokuapp.com/recommendedMovies`, new_movie)
     .then((res) => {
       console.log(res.data);
     });
@@ -173,12 +173,26 @@ export function deleteRecommedations(movie_id) {
   return (dispatch) => {
     axios
       .delete(
-        `http://localhost:5000/recommendedMovies/${movie_id}/${Number(
+        `https://movieapplication1.herokuapp.com/${movie_id}/${Number(
           localStorage.getItem("id")
         )}`
       )
       .then((res) => {
         dispatch({ type: "DELETE_RECOMMENDED", recommended_movie: movie_id });
       });
+  };
+}
+export function getUser() {
+  return (dispatch) => {
+    dispatch({ type: "GET_USER" });
+  };
+}
+export function editUser(user) {
+  console.log(user);
+  user.id = Number(localStorage.getItem("id"));
+  return (dispatch) => {
+    axios.put(`https://movieapplication1.herokuapp.com/users` , user).then((res) => {
+      dispatch({ type: "UPDATE_USER", updated_user: user });
+    });
   };
 }

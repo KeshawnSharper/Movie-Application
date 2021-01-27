@@ -32,10 +32,10 @@ export default class Register extends Component {
   };
   handleSubmit = () => {
     axios
-      .post("http://localhost:5000/register", this.state.user)
+      .post("https://movieapplication1.herokuapp.com/register", this.state.user)
       .then((res) => {
         axios
-          .post("http://localhost:5000/login", {
+          .post("https://movieapplication1.herokuapp.com/login", {
             email: this.state.user.email,
             password: this.state.user.password
           })
