@@ -101,7 +101,7 @@ const MovieProfile = (props) => {
 
   return (
     <>
-      <h1 onClick={() => handleOpen()}>{movie.title}</h1>
+      <h1 onClick={() => handleOpen()} style={{cursor:"pointer"}}>{movie.title}</h1>
       <p>{movie.vote_average}</p>
       <div>
         {stars_earned.map((star) => (

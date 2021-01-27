@@ -94,6 +94,9 @@ function Avatar(props) {
   const submitEditUser = (e) => {
     e.preventDefault();
     localStorage.setItem("picture",updatedUser.picture)
+    localStorage.setItem("last_name",updatedUser.last_name)
+    localStorage.setItem("user_name",updatedUser.user_name)
+    localStorage.setItem("first_name",updatedUser.first_name)
     editUser(updatedUser);
 
   };
