@@ -48,7 +48,7 @@ const MovieList = (props) => {
               <>
                 {nowPlaying[0].results.map((movie) => (
                   <Grid item xs={12} md={4} spacing={12}>
-                    <MovieCard favorite={false} movie={movie} />
+                    <MovieCard list={"nowPlaying"} movie={movie} />
                   </Grid>
                 ))}
               </>
@@ -62,7 +62,7 @@ const MovieList = (props) => {
               <>
                 {popular[0].results.map((movie) => (
                   <Grid item xs={12} md={4} spacing={12}>
-                    <MovieCard favorite={false} movie={movie} />
+                    <MovieCard list={"popular"} movie={movie} />
                   </Grid>
                 ))}
               </>
@@ -76,7 +76,7 @@ const MovieList = (props) => {
               <>
                 {upcoming[0].results.map((movie) => (
                   <Grid item xs={12} md={4} spacing={12}>
-                    <MovieCard movie={movie} />
+                    <MovieCard movie={movie} list={"upcoming"} />
                   </Grid>
                 ))}
               </>
@@ -90,7 +90,7 @@ const MovieList = (props) => {
               <>
                 {topRated[0].results.map((movie) => (
                   <Grid item xs={12} md={4} spacing={12}>
-                    <MovieCard favorite={false} movie={movie} />
+                    <MovieCard list={"topRated"} movie={movie} />
                   </Grid>
                 ))}
               </>
@@ -104,7 +104,7 @@ const MovieList = (props) => {
               <>
                 {search[0].results.map((movie) => (
                   <Grid item xs={12} md={4} spacing={12}>
-                    <MovieCard favorite={false} movie={movie} />
+                    <MovieCard list={"search"} movie={movie} />
                   </Grid>
                 ))}
               </>
@@ -118,7 +118,7 @@ const MovieList = (props) => {
               <>
                 {favorites.map((movie) => (
                   <Grid item xs={12} md={4} spacing={12}>
-                    <MovieCard favorite={true} movie={movie} />
+                    <MovieCard list={"favorites"} movie={movie} />
                   </Grid>
                 ))}
               </>
@@ -132,7 +132,7 @@ const MovieList = (props) => {
               <>
                 {recommended.map((movie) => (
                   <Grid item xs={12} md={4} spacing={12}>
-                    <MovieCard favorite={false} movie={movie} />
+                    <MovieCard list={"recommended"} movie={movie} />
                   </Grid>
                 ))}
               </>

@@ -74,16 +74,10 @@ export const StoreReducer = (state = initState, action) => {
           );
         })
       };
-      case "GET_USER":
+    case "GET_USER":
       return {
         ...state,
-        user: {
-          id: localStorage.getItem("id"),
-          first_name: localStorage.getItem("first_name"),
-          last_name: localStorage.getItem("last_name"),
-          user_name: localStorage.getItem("user_name"),
-          picture: localStorage.getItem("picture")
-        }
+        user: action.user
       };
     case "UPDATE_USER":
       return {

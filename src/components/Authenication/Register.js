@@ -28,7 +28,6 @@ export default class Register extends Component {
         [e.target.name]: e.target.value
       }
     });
-    console.log(this.state.user);
   };
   handleSubmit = () => {
     axios

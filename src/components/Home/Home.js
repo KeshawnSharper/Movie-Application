@@ -11,6 +11,7 @@ import {
   getSearch
 } from "../../actions/actions";
 import { connect } from "react-redux";
+import Avatar from "../Avatar/Avatar";
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -25,12 +26,8 @@ class Home extends Component {
     };
   }
 
-  componentClicked = () => {
-    console.log("clicked");
-  };
-  responseFacebook = (response) => {
-    console.log(response);
-  };
+  // componentClicked = () => {};
+  // responseFacebook = (response) => {};
   searchMovie = (event) => {
     this.props.getSearch(event.target.value);
   };
@@ -43,22 +40,22 @@ class Home extends Component {
               className="logo"
               src="https://res.cloudinary.com/di449masi/image/upload/v1607614171/9d5deab5-3260-4f12-a491-a5926a7493bb_200x200_wwa6ys.png"
             />
-           
-           <Avatar />
 
+            <div className="user">
+              <i className="fa fa-gear user-settings" />
+            </div>
+            <Avatar />
             {/*user end*/}
           </nav>
           <div className="movie-info">
-            <h1>the martian</h1>
+            <h2>the martian</h2>
             <ul className="genre">
               <li>adventure</li>
               <li>sci-fi</li>
               <li>thriller</li>
             </ul>
             {/*genre*/}
-            <button>
-              watch trailer <i className="fa fa-play-circle-o" />
-            </button>
+
             <h3>In theaters</h3>
             <h4>15 Oct, 2015 (USA)</h4>
           </div>
