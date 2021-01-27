@@ -11,7 +11,6 @@ import {
   getSearch
 } from "../../actions/actions";
 import { connect } from "react-redux";
-import Avatar from "../Avatar/Avatar";
 class Home extends Component {
   constructor(props) {
     super(props);

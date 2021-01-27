@@ -30,7 +30,6 @@ function App(props) {
   useEffect(() => {
     console.log("App", props);
 
-<<<<<<< HEAD
     props.getNowPlaying();
     props.getPopular();
     props.getUpcoming();
@@ -39,17 +38,6 @@ function App(props) {
     props.getRecommended();
     props.getUser();
 
-=======
-    props.getUser();
-    
-      props.getNowPlaying();
-      props.getPopular();
-      props.getUpcoming();
-      props.getTopRated();
-      props.getFavorites();
-      props.getRecommended();
-    
->>>>>>> 1c20d8055d2ccc5d3def262d0946932765b7a27b
   }, []);
   return (
     <div className="App">
