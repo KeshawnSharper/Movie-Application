@@ -16,5 +16,5 @@ ReactJS/JavaScript/Html/CSS/Redux/NodeJS
 # Bugs:
 No bugs 
 # How to use it:
-First, clone the repo into your terminal and forward to the House_of_Houses directory. Lastly,install yarn and run yarn start. 
+Just install Yarn and then yarn start 
 
